@@ -1,29 +1,31 @@
-# Tailwind CSS example
+# Setup
 
-This is an example of using [Tailwind CSS](https://tailwindcss.com) in a Next.js project.
+This is a next.js + tailwind css based project and follows next.js standards, follow below steps for setup
 
-## Deploy your own
+- clone the repo
+- cd to the project
+- execute command `npm i`
 
-Deploy the example using [Vercel](https://vercel.com):
+## Start Development Server
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Development mode can be started using `npm run dev`
 
-## How to use
+## Running Tests
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+`jest` has been used as testing framework, to run the test execute below commands
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+- running test `npm test`
+- run in watch mode `npm test -- --watch`
+- run with coverage output `npm test -- --coverage`
 
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Production Build
 
-## Notes
+To create production build execute `npm run build`
 
-This example is a basic starting point for using [Tailwind CSS](https://tailwindcss.com) with Next.js. It includes the following [PostCSS](https://github.com/postcss/postcss) plugins:
+## Serving Production Build
 
-- [postcss-preset-env](https://preset-env.cssdb.org/) - Adds stage 2+ features and autoprefixes
+To server production build output execute `npm start`
 
-To control the generated stylesheet's filesize, this example uses Tailwind CSS' [`purge` option](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused CSS.
+## Deployment
+
+Project has been deployed using Vercel [Open URL](https://spacex-launches-demo-igo90qga3.vercel.app/)

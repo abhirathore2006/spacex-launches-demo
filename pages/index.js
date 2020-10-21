@@ -1,25 +1,25 @@
-import { useEffect, useReducer, useState } from 'react';
-import Head from 'next/head';
+import React, { useEffect, useState } from 'react'
+import Head from 'next/head'
 
-import FilterMenu from '../components/FilterMenu';
-import ProgramView from '../components/ProgramView';
+import FilterMenu from '../components/FilterMenu'
+import ProgramView from '../components/ProgramView'
 
-export default function IndexPage(props) {
-  let [filters, setFilters] = useState(null);
-  let [launches, setLaunches] = useState(props.launches);
+export default function IndexPage (props) {
+  const [filters, setFilters] = useState(null)
+  const [launches, setLaunches] = useState(props.launches)
   useEffect(() => {
-    if(filters && !filters.isInitial) {
+    if (filters && !filters.isInitial) {
       fetchPrograms(filters)
-      .then((data) => {
-        setLaunches(data);
-      })
-      .catch((err) => {
-        //no need to handle error as we already have some data displayed,
-        // we can show notification error here
-      });
+        .then((data) => {
+          setLaunches(data)
+        })
+        .catch((err) => {
+          console.error(err)
+          // no need to handle error as we already have some data displayed,
+          // we can show notification error here
+        })
     }
-
-  }, [filters, setLaunches]);
+  }, [filters, setLaunches])
   return (
     <>
       <Head>
@@ -36,39 +36,46 @@ export default function IndexPage(props) {
           </section>
         </div>
         <div className="flex flex-row justify-center">
-          <h3 className="text-lg font-medium leading-relaxed text-gray-600">Developed By: <a className="text-gray-900" href="https://github.com/abhirathore2006">Abhimanyu Rathore</a></h3>
+          <h3 className="text-lg font-medium leading-relaxed text-gray-600">
+            Developed By:{' '}
+            <a className="text-gray-900" href="https://github.com/abhirathore2006">
+              Abhimanyu Rathore
+            </a>
+          </h3>
         </div>
       </div>
     </>
-  );
+  )
 }
 
-function fetchPrograms(filters) {
-  let url = 'https://api.spacexdata.com/v3/launches?limit=100';
+function fetchPrograms (filters) {
+  let url = 'https://api.spacexdata.com/v3/launches?limit=100'
   if (filters) {
     Object.keys(filters).forEach((key) => {
-      if (filters[key] !== null) {
-        url = `${url}&${key}=${filters[key]}`;
+      if (filters[key] !== null && key !== 'isInitial') {
+        url = `${url}&${key}=${filters[key]}`
       }
-    });
+    })
   }
-  return fetch(url).then((res) => res.json());
+  return fetch(url).then((res) => res.json())
 }
-//getServerSideProps
-export async function getStaticProps(context) {
+
+// using getStaticProps instead of getServerSideProps as data don't change that frequent
+export async function getStaticProps (context) {
   return fetchPrograms()
     .then((data) => {
       return {
         props: {
           launches: data
         }
-      };
+      }
     })
     .catch((err) => {
+      console.error(err)
       return {
         props: {
           launches: []
         }
-      };
-    });
+      }
+    })
 }
