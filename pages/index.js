@@ -53,7 +53,7 @@ function fetchPrograms (filters) {
   if (filters) {
     Object.keys(filters).forEach((key) => {
       if (filters[key] !== null && key !== 'isInitial') {
-        url = `${url}&${key}=${filters[key]}`
+        url = `${url}&${key}=${String(filters[key]).toLowerCase()}`
       }
     })
   }
